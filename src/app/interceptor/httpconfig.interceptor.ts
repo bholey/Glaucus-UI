@@ -12,12 +12,13 @@ import { Observable, throwError } from 'rxjs';
 import {map, catchError, retry, tap} from 'rxjs/operators';
 import {error} from 'util';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class HttpconfigInterceptor implements HttpInterceptor {
 
   constructor(
+    public dialog: MatDialog,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
@@ -40,6 +41,7 @@ export class HttpconfigInterceptor implements HttpInterceptor {
               verticalPosition: 'bottom',
               horizontalPosition: 'end'
             });
+            this.dialog.closeAll();
             this.router.navigate(['/login']);
           } catch (e) {
             this.snackBar.open('An error occurred', 'Close', {
@@ -49,6 +51,7 @@ export class HttpconfigInterceptor implements HttpInterceptor {
           }
         } else if (err && err.status === 400) {
           localStorage.removeItem('idtableUserId');
+          this.dialog.closeAll();g
           this.router.navigate(['/login']);
         }
         const errorMessage = err.error.message || err.statusText;

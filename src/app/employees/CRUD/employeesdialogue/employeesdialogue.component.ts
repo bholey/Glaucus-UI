@@ -95,6 +95,7 @@ export class EmployeesdialogueComponent implements OnInit {
           }
         },
         error => {
+        console.log('hlo ')
           const errorMessage = <any> error;
           if (errorMessage.error) {
             this.snackBar.open(errorMessage.error.errorMessage, 'Close', {
