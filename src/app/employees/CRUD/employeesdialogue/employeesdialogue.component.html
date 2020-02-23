@@ -1,0 +1,84 @@
+<h1 mat-dialog-title>{{action}} Employee</h1>
+<form [formGroup]="empForm"  class="p-16" (ngSubmit)="empForm.valid && postForm()">
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="empdata.name"  formControlName="name" required [disabled]=disable appAlphabetDirective>
+
+    <mat-error *ngFor="let validation of employeeValidationMessage.name">
+      <mat-error class="error-message" *ngIf="empForm.get('name').hasError(validation.type)">{{validation.message}}</mat-error>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Employee Email Address</mat-label>
+    <input matInput [(ngModel)]="empdata.tableEmployeeEmailAddress"  formControlName="tableEmployeeEmailAddress" required>
+    <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeEmailAddress">
+      <mat-error class="error-message" *ngIf="empForm.get('tableEmployeeEmailAddress').hasError(validation.type)">{{validation.message}}</mat-error>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field  appearance="fill">
+    <mat-label>Employee DOB</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="empdata.tableEmployeeDOB" formControlName="tableEmployeeDOB" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeDOB">
+      <mat-error class="error-message" *ngIf="empForm.get('tableEmployeeDOB').hasError(validation.type)">{{validation.message}}</mat-error>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field  appearance="fill">
+    <mat-label>Employee DOJ</mat-label>
+    <input matInput [matDatepicker]="picker1" [(ngModel)]="empdata.tableEmployeeDOJ"  formControlName="tableEmployeeDOJ" required>
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+    <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeDOJ">
+      <mat-error class="error-message" *ngIf="empForm.get('tableEmployeeDOJ').hasError(validation.type)">{{validation.message}}</mat-error>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Employee Salary</mat-label>
+    <input matInput [(ngModel)]="empdata.tableEmployeeSalary"  formControlName="tableEmployeeSalary" appAmountDirective required>
+    <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeSalary">
+      <mat-error class="error-message" *ngIf="empForm.get('tableEmployeeSalary').hasError(validation.type)">{{validation.message}}</mat-error>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Employee Role</mat-label>
+    <mat-select [(ngModel)]="empdata.tableEmployeeRole" [value]="data.tableEmployeeRole"  formControlName="tableEmployeeRole" required>
+      <mat-option *ngFor="let rol of roleData" [value]="rol.role" >
+        {{rol.role}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeRole">
+      <mat-error class="error-message" *ngIf="empForm.get('tableEmployeeRole').hasError(validation.type)">{{validation.message}}</mat-error>
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <div *ngIf="action =='View'">
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+      <input matInput [(ngModel)]="empdata.tableEmployeeGender"  formControlName="tableEmployeeSalary">
+    </mat-form-field>
+  </div>
+  <div *ngIf="action !='View'">
+    <label id="example-radio-group-label" style="color: rgba(0,0,0,.6); padding-left: 12px;">Gender</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group" [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="empdata.tableEmployeeGender" >
+      <mat-radio-button class="example-radio-button" *ngFor="let gen of gender" [value]="gen" style="margin-left: 20px;">
+        {{gen | titlecase }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+
+</div>
+<div mat-dialog-actions style="float: right">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button *ngIf="action !== 'View'" mat-button type="submit" color="primary"  cdkFocusInitial>{{action}}</button>
+</div>
+</form>

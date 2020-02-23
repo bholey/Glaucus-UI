@@ -1,0 +1,45 @@
+<div class="outer-div">
+  <div class="example-container">
+    <h2>Signup Page</h2>
+    <form [formGroup]="signupForm"  class="p-16" (ngSubmit)="signupForm.valid && onSignup()">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="signup.userName" formControlName="userName">
+      <mat-error *ngFor="let validation of signupValidationMessage.userName">
+        <mat-error class="error-message" *ngIf="signupForm.get('userName').hasError(validation.type)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email"  [(ngModel)]="signup.userEmail" formControlName="userEmail"  >
+        <mat-error *ngFor="let validation of signupValidationMessage.userEmail">
+          <mat-error class="error-message" *ngIf="signupForm.get('userEmail').hasError(validation.type)   ">{{validation.message}}</mat-error>
+        </mat-error>
+      </mat-form-field>
+    <br><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="signup.userPass" formControlName="userPass">
+      <mat-error *ngFor="let validation of signupValidationMessage.userPass">
+        <mat-error class="error-message" *ngIf="signupForm.get('userPass').hasError(validation.type)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Role</mat-label>
+      <mat-select [(ngModel)]="signup.userRole" formControlName="userRole">
+        <mat-option *ngFor="let rol of roleData" [value]="rol.role" >
+          {{rol.role}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngFor="let validation of signupValidationMessage.userRole">
+        <mat-error class="error-message" *ngIf="signupForm.get('userRole').hasError(validation.type)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <button mat-flat-button color="primary" type="submit" style="float: right">Sign Up</button>
+    </form>
+  </div>
+</div>
+

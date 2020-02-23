@@ -1,0 +1,64 @@
+<div style="width: 100%;">
+  <h1 style="float: left;"> All Employees</h1>
+  <button mat-flat-button color="primary" style="float: right; margin-top: 1.67em" (click)="openDialog(null, 'Create')">New</button>
+</div>
+<table mat-table [dataSource]="employeesData" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+  <!-- Position Column -->
+  <ng-container matColumnDef="idtableEmployeeId">
+    <th mat-header-cell *matHeaderCellDef> Employees Id  </th>
+    <td mat-cell *matCellDef="let element"> {{element.idtableEmployeeId}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="tableEmployeeEmailAddress">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.tableEmployeeEmailAddress}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="tableEmployeeDOB">
+    <th mat-header-cell *matHeaderCellDef> DOB </th>
+    <td mat-cell *matCellDef="let element"> {{element.tableEmployeeDOB | date: 'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tableEmployeeDOJ">
+    <th mat-header-cell *matHeaderCellDef> DOJ  </th>
+    <td mat-cell *matCellDef="let element"> {{element.tableEmployeeDOJ |  date: 'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tableEmployeeSalary">
+    <th mat-header-cell *matHeaderCellDef> Salary  </th>
+    <td mat-cell *matCellDef="let element"> {{element.tableEmployeeSalary | currency: 'INR'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tableEmployeeGender">
+    <th mat-header-cell *matHeaderCellDef> Gender  </th>
+    <td mat-cell *matCellDef="let element"> {{element.tableEmployeeGender | titlecase}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tableEmployeeRole">
+    <th mat-header-cell *matHeaderCellDef> Role  </th>
+    <td mat-cell *matCellDef="let element"> {{element.tableEmployeeRole}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element"> <a (click)="openDialog(element, 'Update')"><mat-icon>edit</mat-icon></a>
+      <a (click)="openDialog(element, 'View')"><mat-icon>visibility</mat-icon></a>
+      <a (click)="confirmationDialogue(element.idtableEmployeeId)"><mat-icon>delete</mat-icon></a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

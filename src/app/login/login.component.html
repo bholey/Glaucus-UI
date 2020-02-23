@@ -1,0 +1,26 @@
+<div class="outer-div">
+  <div class="example-container">
+    <h2>Login Page</h2>
+    <form [formGroup]="loginForm"  class="p-16" (ngSubmit)="loginForm.valid && onLogin()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" [(ngModel)]="login.email"  formControlName="email">
+      <mat-error *ngFor="let validation of loginValidationMessage.email">
+        <mat-error class="error-message" *ngIf="loginForm.get('email').hasError(validation.type)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" [(ngModel)]="login.password" formControlName="password">
+      <mat-error *ngFor="let validation of loginValidationMessage.password">
+        <mat-error class="error-message" *ngIf="loginForm.get('password').hasError(validation.type)">{{validation.message}}</mat-error>
+      </mat-error>
+    </mat-form-field>
+
+    <br>
+    <button mat-flat-button color="primary" type="submit" style="float: right">Login</button>
+    </form>
+  </div>
+</div>
+
