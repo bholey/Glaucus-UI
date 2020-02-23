@@ -51,7 +51,7 @@ export class HttpconfigInterceptor implements HttpInterceptor {
           }
         } else if (err && err.status === 400) {
           localStorage.removeItem('idtableUserId');
-          this.dialog.closeAll();g
+          this.dialog.closeAll();
           this.router.navigate(['/login']);
         }
         const errorMessage = err.error.message || err.statusText;
