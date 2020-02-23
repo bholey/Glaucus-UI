@@ -1,4 +1,4 @@
-<app-toobar></app-toobar>
+<!--<app-toobar></app-toobar>-->
 <div style="width: 100%;">
   <h1 style="float: left;"> All Employees</h1>
   <button mat-flat-button color="primary" style="float: right; margin-top: 1.67em; margin-right:15px;" (click)="openDialog(null, 'Create')">New</button>
@@ -53,9 +53,10 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Action </th>
-    <td mat-cell *matCellDef="let element"> <a (click)="openDialog(element, 'Update')"><mat-icon>edit</mat-icon></a>
-      <a (click)="openDialog(element, 'View')"><mat-icon>visibility</mat-icon></a>
-      <a (click)="confirmationDialogue(element.idtableEmployeeId)"><mat-icon>delete</mat-icon></a>
+    <td mat-cell *matCellDef="let element">
+      <a class="pointer" (click)="openDialog(element, 'Update')"><mat-icon>edit</mat-icon></a>
+      <a class="pointer" (click)="openDialog(element, 'View')"><mat-icon>visibility</mat-icon></a>
+      <a class="pointer" (click)="confirmationDialogue(element.idtableEmployeeId)"><mat-icon>delete</mat-icon></a>
     </td>
   </ng-container>
 

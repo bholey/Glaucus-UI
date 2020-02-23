@@ -20,7 +20,7 @@
   <br>
   <mat-form-field  appearance="fill">
     <mat-label>Employee DOB</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="empdata.tableEmployeeDOB" formControlName="tableEmployeeDOB" required>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="empdata.tableEmployeeDOB" [max]="maxDate" formControlName="tableEmployeeDOB" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeDOB">
@@ -30,7 +30,7 @@
   <br>
   <mat-form-field  appearance="fill">
     <mat-label>Employee DOJ</mat-label>
-    <input matInput [matDatepicker]="picker1" [(ngModel)]="empdata.tableEmployeeDOJ"  formControlName="tableEmployeeDOJ" required>
+    <input matInput [matDatepicker]="picker1" [(ngModel)]="empdata.tableEmployeeDOJ" [max]="maxDate"  formControlName="tableEmployeeDOJ" required>
     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
     <mat-datepicker #picker1></mat-datepicker>
     <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeDOJ">
@@ -61,7 +61,7 @@
   <div *ngIf="action =='View'">
     <mat-form-field appearance="fill">
       <mat-label>Gender</mat-label>
-      <input matInput [(ngModel)]="empdata.tableEmployeeGender"  formControlName="tableEmployeeGender">
+      <input id="employee_gender" matInput [(ngModel)]="empdata.tableEmployeeGender"  formControlName="tableEmployeeGender">
     </mat-form-field>
   </div>
   <div *ngIf="action !='View'">
@@ -80,6 +80,6 @@
 </div>
 <div mat-dialog-actions style="float: right">
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button *ngIf="action !== 'View'" mat-button type="submit" color="primary"  cdkFocusInitial>{{action}}</button>
+  <button *ngIf="action !== 'View'" mat-button type="submit" class="mat-primary"  cdkFocusInitial>{{action}}</button>
 </div>
 </form>

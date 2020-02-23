@@ -2,3 +2,9 @@
 mat-form-field{
   width:100%;
 }
+
+#employee_gender {text-transform: capitalize;}
+#pointer {
+  cursor: pointer;
+}
+
