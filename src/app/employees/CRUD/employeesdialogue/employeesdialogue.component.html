@@ -41,6 +41,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Employee Salary</mat-label>
     <input matInput [(ngModel)]="empdata.tableEmployeeSalary"  formControlName="tableEmployeeSalary" appAmountDirective required>
+    <span matPrefix>₹&nbsp;</span>
     <mat-error *ngFor="let validation of employeeValidationMessage.tableEmployeeSalary">
       <mat-error class="error-message" *ngIf="empForm.get('tableEmployeeSalary').hasError(validation.type)">{{validation.message}}</mat-error>
     </mat-error>
@@ -60,7 +61,7 @@
   <div *ngIf="action =='View'">
     <mat-form-field appearance="fill">
       <mat-label>Gender</mat-label>
-      <input matInput [(ngModel)]="empdata.tableEmployeeGender"  formControlName="tableEmployeeSalary">
+      <input matInput [(ngModel)]="empdata.tableEmployeeGender"  formControlName="tableEmployeeGender">
     </mat-form-field>
   </div>
   <div *ngIf="action !='View'">

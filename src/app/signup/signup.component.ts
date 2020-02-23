@@ -57,6 +57,9 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this._initForm();
+    if (localStorage.getItem('idtableUserId')) {
+      localStorage.removeItem('idtableUserId');
+    }
     // @ts-ignore
     this.roleService.fetchRoles().subscribe((res: RoleInterface[]) => {
       this.roleData = res;
