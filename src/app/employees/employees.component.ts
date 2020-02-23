@@ -22,6 +22,10 @@ export class EmployeesComponent implements OnInit {
   private formBuilder = new FormBuilder();
   constructor(private employeesService: EmployeesService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
   ngOnInit() {
+    this._initForm();
+    this.getEmployees();
+  }
+  private getEmployees() {
     this.employeesService.fetchEmployees().subscribe((response: any) => {
       this.employeesData = response;
     }, error => {
@@ -60,7 +64,9 @@ export class EmployeesComponent implements OnInit {
       data: {empldata, act}
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result) {
+        this.getEmployees();
+      }
     });
   }
 
@@ -70,7 +76,9 @@ export class EmployeesComponent implements OnInit {
       data: {module: 'Employee', id: empid},
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result) {
+        this.getEmployees();
+      }
     });
   }
 

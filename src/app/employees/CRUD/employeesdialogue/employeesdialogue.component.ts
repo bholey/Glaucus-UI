@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {EmployeeInterface} from '../../employee.interface';
 import {EmployeesService} from '../../employees.service';
@@ -89,7 +89,7 @@ export class EmployeesdialogueComponent implements OnInit {
       this.employeesService.updateEmployees(this.empdata.idtableEmployeeId, this.empdata).subscribe(data => {this.responseData = data;
       if (this.responseData) {
             this.empdata = this.responseData;
-            this.dialogRef.close();
+            this.dialogRef.close(true);
           }
         },
         error => {
@@ -103,11 +103,10 @@ export class EmployeesdialogueComponent implements OnInit {
         }
       );
     } else {
-      console.log('startr');
       this.employeesService.createEmployee(this.empdata).subscribe(data => {this.responseData = data;
-                                                                            if (this.responseData) {
+      if (this.responseData) {
             this.empdata = this.responseData;
-            this.dialogRef.close();
+            this.dialogRef.close(true);
           }
         },
         error => {

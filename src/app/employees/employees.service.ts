@@ -26,7 +26,6 @@ export class EmployeesService {
     return this.http.put<EmployeeInterface>(`${environment.app_url}/employee/${id}`, employeesData);
   }
   createEmployee(employeeData: EmployeeInterface) {
-    console.log('runnnnnnn')
     return this.http.post(`${environment.app_url}/employee/`, employeeData);
   }
 

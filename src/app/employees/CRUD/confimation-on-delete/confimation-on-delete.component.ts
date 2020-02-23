@@ -31,7 +31,7 @@ export class ConfimationOnDeleteComponent implements OnInit {
   delete(id: number) {
     this.employeesService.deleteEmployee(id).subscribe(data => {this.responseData = data
         if (this.responseData) {
-          this.dialogRef.close();
+          this.dialogRef.close(true);
         }
       },
       error => {
