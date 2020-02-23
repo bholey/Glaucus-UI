@@ -26,6 +26,8 @@ import {MatNativeDateModule} from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AmountDirectiveDirective } from './shared/directives/amount-directive.directive';
 import { AlphabetDirectiveDirective } from './shared/directives/alphabet-directive.directive';
+import { ToobarComponent } from './shared/toobar/toobar.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 const appRoutes: Routes = [
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     RoleComponent,
     ConfimationOnDeleteComponent,
     AmountDirectiveDirective,
-    AlphabetDirectiveDirective
+    AlphabetDirectiveDirective,
+    ToobarComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ const appRoutes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
+    MatToolbarModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
