@@ -12,12 +12,14 @@ import { Observable, throwError } from 'rxjs';
 import {map, catchError, retry, tap} from 'rxjs/operators';
 import {error} from 'util';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Injectable()
 export class HttpconfigInterceptor implements HttpInterceptor {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Clone the request to add the new header
@@ -29,13 +31,28 @@ export class HttpconfigInterceptor implements HttpInterceptor {
     }
     const cloneReq = req.clone({headers});
     // Pass the cloned request instead of the original request to the next handle
-    return next.handle(cloneReq).pipe(catchError(err => {
-      if (err && err.status === 400) {
-       localStorage.removeItem('idtableUserId');
-       this.router.navigate(['/login']);
-      }
-      const errorMessage = err.error.message || err.statusText;
-      return throwError(errorMessage);
+    return next.handle(cloneReq)
+      .pipe(catchError((err: any) => {
+        // if user not login/signup then its error shown in snackbar otherwise its redirect to login page
+        if (!localStorage.getItem('idtableUserId') && err instanceof HttpErrorResponse) {
+          try {
+            this.snackBar.open(err.error.errorMessage, 'Close', {
+              verticalPosition: 'bottom',
+              horizontalPosition: 'end'
+            });
+            this.router.navigate(['/login']);
+          } catch (e) {
+            this.snackBar.open('An error occurred', 'Close', {
+              verticalPosition: 'bottom',
+              horizontalPosition: 'end'
+            });
+          }
+        } else if (err && err.status === 400) {
+          localStorage.removeItem('idtableUserId');
+          this.router.navigate(['/login']);
+        }
+        const errorMessage = err.error.message || err.statusText;
+        return throwError(errorMessage);
     }))
     ;
   }

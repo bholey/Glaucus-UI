@@ -36,24 +36,27 @@ export class LoginComponent implements OnInit {
       ])),
       password: new FormControl('', Validators.compose([
         Validators.required,
-        // Validators.minLength(8),
         Validators.pattern('^(?=\\D*\\d)(?=[^a-z]*[a-z])(?=[^A-Z]*[A-Z])(?=.*[$@$!%*?&]).{8,}$')
       ]))
     });
   }
   ngOnInit() {
     this._initForm();
+    // if user login then set into logout state
+    if (localStorage.getItem('idtableUserId')) {
+      localStorage.removeItem('idtableUserId');
+    }
   }
 
   onLogin() {
     this.loginService.login(this.login).subscribe(data => {this.responseData = data;
-                                                           if (this.responseData) {
+    if (this.responseData) {
           localStorage.setItem('idtableUserId', this.responseData);
           this.router.navigate(['/employees']);
         }
       },
       error => {
-        const errorMessage = error;
+        let errorMessage = <any> error;
         if (errorMessage.error) {
           this.snackBar.open(errorMessage.error.errorMessage, 'Close', {
             verticalPosition: 'bottom',

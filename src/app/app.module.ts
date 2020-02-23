@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import {MatSelectModule} from '@angular/material/select';
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatFormFieldModule, MatInputModule} from '@angular/material';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpconfigInterceptor } from './interceptor/httpconfig.interceptor';
@@ -28,6 +28,8 @@ import { AmountDirectiveDirective } from './shared/directives/amount-directive.d
 import { AlphabetDirectiveDirective } from './shared/directives/alphabet-directive.directive';
 import { ToobarComponent } from './shared/toobar/toobar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 
 const appRoutes: Routes = [
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
     MatNativeDateModule,
     MatSnackBarModule,
     MatToolbarModule,
+    MatTooltipModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -77,6 +80,7 @@ const appRoutes: Routes = [
   entryComponents: [EmployeesdialogueComponent, ConfimationOnDeleteComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpconfigInterceptor, multi: true },
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}},
     MatDatepickerModule
   ],
   bootstrap: [AppComponent]
